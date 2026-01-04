@@ -124,7 +124,7 @@ function updateSummary() {
     if (service.classList.contains('paint') && paintState) {
       if (paintState.value === 'bad') {
         price = price * 1.20;
-      } else if (paintState.value === 'premium') {
+      } else if (paintState.value === 'verybad') {
         price = price * 1.35;
       }
       // standard = podstawowa cena
@@ -147,4 +147,5 @@ function updateSummary() {
   if (vatPrice) vatPrice.textContent = vat.toFixed(2) + ' zł';
   if (totalPrice) totalPrice.textContent = brutto.toFixed(2) + ' zł';
 }
+
 
