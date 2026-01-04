@@ -11,12 +11,10 @@ const vehicleType = document.getElementById('vehicleType');
 
 let selectedServices = [];
 
-/* ====== KLIK W KAFELKI ====== */
 services.forEach(function (service) {
   service.addEventListener('click', function () {
 
-    /* --- BLOKADA: tylko jedna korekta lakieru naraz --- */
-    // działa jeśli korekty mają klasę: correction
+    /* blokada - tylko jedna korekta lakieru naraz */
     if (service.classList.contains('correction')) {
       selectedServices.forEach(function (item) {
         if (item.classList.contains('correction')) {
@@ -29,12 +27,9 @@ services.forEach(function (service) {
       });
     }
 
-    /* --- BLOKADA: PPF Full Front vs PPF Full Body --- */
-    // działa jeśli:
-    // Full Front ma klasę: ppf-front
-    // Full Body ma klasę: ppf-body
+    /* blokada - PPF Full Front lub PPF Full Body */
     if (service.classList.contains('ppf-front')) {
-      // klikam front -> usuń full body (jeśli był)
+      // klik w front usunie full body (jeśli był zaznaczony)
       selectedServices.forEach(function (item) {
         if (item.classList.contains('ppf-body')) {
           item.classList.remove('active');
@@ -47,7 +42,7 @@ services.forEach(function (service) {
     }
 
     if (service.classList.contains('ppf-body')) {
-      // klikam body -> usuń full front (jeśli był)
+      // klik w body usunie full front (jeśli był zaznaczony)
       selectedServices.forEach(function (item) {
         if (item.classList.contains('ppf-front')) {
           item.classList.remove('active');
@@ -59,7 +54,7 @@ services.forEach(function (service) {
       });
     }
 
-    /* --- dodaj/usuń usługę --- */
+    /* dodaj/usuń usługę */
     if (selectedServices.includes(service)) {
       selectedServices = selectedServices.filter(function (item) {
         return item !== service;
@@ -74,7 +69,7 @@ services.forEach(function (service) {
   });
 });
 
-/* ====== ZMIANA SELECTÓW ====== */
+/* zmiany zaczytywane z list rozwijanych, aby ustalać odpowiednie stawki cen */
 if (vehicleType) {
   vehicleType.addEventListener('change', function () {
     updateSummary();
@@ -87,7 +82,7 @@ if (paintState) {
   });
 }
 
-/* ====== WYCZYŚĆ ====== */
+/* guzik do czyszczenia zaznaczonych usług */
 if (clearBtn) {
   clearBtn.addEventListener('click', function () {
     selectedServices = [];
@@ -98,7 +93,7 @@ if (clearBtn) {
   });
 }
 
-/* ====== LICZENIE I PODSUMOWANIE ====== */
+/* liczenie docelowej finalnej ceny - summary*/
 function updateSummary() {
   if (!summaryList) return;
 
@@ -113,7 +108,7 @@ function updateSummary() {
     let name = service.getAttribute('data-name');
     let price = Number(service.getAttribute('data-price'));
 
-    // MNOŻNIK: typ pojazdu
+    // mnożnik zależny od typu pojazdu
     if (vehicleType) {
       if (vehicleType.value === 'sedan') {
         price = price * 1.10;
@@ -122,17 +117,17 @@ function updateSummary() {
       } else if (vehicleType.value === 'van') {
         price = price * 1.35;
       }
-      // hatchback = bez zmian
+      // hatchback = podstawowa cena
     }
 
-    // MNOŻNIK: stan lakieru (tylko .paint)
+    // mnożnik zależny od stanu lakieru
     if (service.classList.contains('paint') && paintState) {
       if (paintState.value === 'bad') {
         price = price * 1.20;
       } else if (paintState.value === 'premium') {
         price = price * 1.35;
       }
-      // standard = bez zmian
+      // standard = podstawowa cena
     }
 
     totalBrutto = totalBrutto + price;
@@ -143,7 +138,7 @@ function updateSummary() {
     summaryList.appendChild(row);
   });
 
-  // BRUTTO/NETTO/VAT
+  // ustalenia dotyczące finalnych cen wyświetlanych na końcu
   const brutto = totalBrutto;
   const netto = brutto / 1.23;
   const vat = brutto - netto;
@@ -152,3 +147,4 @@ function updateSummary() {
   if (vatPrice) vatPrice.textContent = vat.toFixed(2) + ' zł';
   if (totalPrice) totalPrice.textContent = brutto.toFixed(2) + ' zł';
 }
+
