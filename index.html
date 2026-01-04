@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Of Auto – Kalkulator Detailingowy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header container">
+    <p class="badge">Art Of Auto • Kalkulator</p>
+        <h1>Kalkulator usług detailingowych</h1>
+    <p class="subtitle">
+        Wybierz pojazd i usługi. Cena aktualizuje się na bieżąco — z rozbiciem jak faktura.
+    </p>
+
+    <section class="selectors">
+        <article class="field">
+            <label for="vehicleType">Typ pojazdu</label>
+                <select id="vehicleType">
+                    <option value="hatchback">Hatchback</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="van">Van</option>
+                </select>
+        </article>
+
+        <article class="field">
+            <label for="paintState">Stan lakieru</label>
+                <select id="paintState">
+                    <option value="standard">Standard</option>
+                    <option value="bad">Zniszczony (+20%)</option>
+                    <option value="premium">Głębsze uszkodzenia (+35%)</option>
+                </select>
+            <small>Wpływa na korektę lakieru, powłoki i PPF.</small>
+        </article>
+</section>
+</header>
+
+<main class="content container">
+
+    <!-- USŁUGI -->
+    <section class="panel">
+        <header class="panelHeader">
+            <h2>Wybierz usługi</h2>
+            <p class="muted">Kliknij kartę, aby dodać lub usunąć usługę.</p>
+        </header>
+
+        <section class="services">
+
+            <article class="service" data-name="Mycie zewnętrzne" data-price="120">
+                <h3>Mycie zewnętrzne</h3>
+                <p>Bezpieczne mycie ręczne.</p>
+                <span>120 zł</span>
+            </article>
+
+            <article class="service" data-name="Czyszczenie wnętrza" data-price="150">
+                <h3>Czyszczenie wnętrza</h3>
+                <p>Odkurzanie i plastiki.</p>
+                <span>150 zł</span>
+            </article>
+
+            <article class="service" data-name="Pranie tapicerki" data-price="300">
+                <h3>Pranie tapicerki</h3>
+                <p>Fotele, kanapa, dywaniki.</p>
+                <span>300 zł</span>
+            </article>
+
+            <article class="service paint correction" data-name="Korekta lakieru 1 etap" data-price="800">
+                <h3>Korekta lakieru – 1 etap</h3>
+                <p>Usunięcie lekkich rys.</p>
+                <span>800 zł</span>
+            </article>
+
+            <article class="service paint correction" data-name="Korekta lakieru 2 etapy" data-price="1400">
+                <h3>Korekta lakieru – 2 etapy</h3>
+                <p>Średnie i głębokie rysy.</p>
+                <span>1400 zł</span>
+            </article>
+
+            <article class="service paint correction" data-name="Korekta lakieru 3 etapy" data-price="2200">
+                <h3>Korekta lakieru – 3 etapy</h3>
+                <p>Maksymalne usunięcie rys i defektów lakieru.</p>
+                <span>2200 zł</span>
+            </article>
+
+            <article class="service paint" data-name="Powłoka ceramiczna 3 lata" data-price="1200">
+                <h3>Powłoka ceramiczna – 3 lata</h3>
+                <p>Ochrona i połysk.</p>
+                <span>1200 zł</span>
+            </article>
+
+            <article class="service paint ppf ppf-front" data-name="PPF Full Front" data-price="4500">
+                <h3>Folia PPF – Full Front</h3>
+                <p>Zderzak, maska, błotniki.</p>
+                <span>4500 zł</span>
+            </article>
+
+            <article class="service paint ppf ppf-body" data-name="Folia PPF – Full Body" data-price="14000">
+                <h3>Folia PPF – Full Body</h3>
+                <p>Kompleksowe zabezpieczenie całego pojazdu.</p>
+                <span>14000 zł</span>
+            </article>
+
+        </section>
+
+            <button id="clearBtn" class="btn ghost">Wyczyść wybór</button>
+    </section>
+
+  <!-- PODSUMOWANIE -->
+    <aside class="panel summary">
+        <header class="panelHeader">
+            <h2>Podsumowanie</h2>
+            <p class="muted">Rozbicie kosztów</p>
+        </header>
+
+        <section id="summaryList" class="summaryList">
+            <p class="empty">Brak wybranych usług</p>
+        </section>
+
+        <footer class="total">
+            <div class="totalRow totalBrutto">
+                <span>Brutto:</span>
+                <span id="totalPrice">0.00 zł</span>
+            </div>
+
+            <div class="totalRow">
+                <span>Netto:</span>
+                <span id="netPrice">0.00 zł</span>
+            </div>
+
+            <div class="totalRow">
+                <span>VAT (23%):</span>
+                <span id="vatPrice">0.00 zł</span>
+            </div>
+        </footer>
+
+
+
+
+        <p class="note">
+        * Projekt — ceny przykładowe.
+        </p>
+    </aside>
+
+</main>
+
+<footer class="footer">
+    Projekt — Kalkulator detailingowy (HTML / CSS / JS)
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
